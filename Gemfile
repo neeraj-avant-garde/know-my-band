@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 group :production do
   gem 'pg', '0.15.1' #Heroku uses PostgreSQL
