@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 group :production do
-  gem 'pg', '0.15.1' #Heroku uses PostgreSQL
+  gem 'pg', '0.15.1' ##Heroku uses PostgreSQL
 end
 
 group :development, :test do
@@ -13,6 +14,9 @@ gem 'rails', '4.0.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '4.0.0'
+
+## A twitter project for sass, widely used, dont know the benefits yet. Just using to get some readymade CSS
+gem 'bootstrap-sass', '2.3.2.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '2.1.1'

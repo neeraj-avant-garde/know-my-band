@@ -3,7 +3,13 @@ KnowMyBand::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'pages#index'
+
+  ## Pages
+  match 'about-us',     to: 'pages#about_us', via: [:get]
+  match 'coming-soon',  to: 'pages#coming_soon', via: [:get]
+  match 'privacy',      to: 'pages#privacy', via: [:get]
+  match 'terms',        to: 'pages#terms', via: [:get]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
