@@ -3,6 +3,7 @@ ruby '2.0.0'
 
 group :production do
   gem 'pg', '0.15.1' ##Heroku uses PostgreSQL
+  gem 'rails_12factor', '0.0.2' ## For serving assets, Images and stylesheets dont work in heroku without this Gem
 end
 
 group :development, :test do
@@ -52,4 +53,3 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
