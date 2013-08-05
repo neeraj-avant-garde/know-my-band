@@ -1,0 +1,39 @@
+<% if @user.events.any? %>
+  <h3>Invitations (<%= @user.events.count %>)</h3>
+  <ol class="microposts">
+    <% @user.events.each do |event| %>
+      <%= render event %>
+    <% end %>
+  </ol>
+<% end %>
+<p id="notice"><%= notice %></p>
+
+<br>
+<h1>Profile</h1>
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Membership type:</strong>
+  <%= @user.membership_type %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Facebook:</strong>
+  <%= link_to @user.facebook_id, "https://www.facebook.com/#{@user.facebook_id}", target: '_blank' %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

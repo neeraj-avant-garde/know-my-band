@@ -10,6 +10,9 @@ group :development, :test do
   gem 'sqlite3', '1.3.7'
 end
 
+## For date time selection in forms
+gem 'bootstrap-datetimepicker-rails', '0.0.11'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 

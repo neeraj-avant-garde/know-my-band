@@ -4,8 +4,9 @@
       <%= link_to (image_tag("logo_know_my_band.png", :alt=>"Know my Band")), root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Artists",     '#' %></li>
-          <li><%= link_to "Events",      '#' %></li>
+          <li><%= link_to "Artists",     users_path %></li>
+          <li><%= link_to "Events",      events_path %></li>
+          <li><%= link_to "Invitations", invitations_path %></li>
           <li><%= link_to "Coming soon", '/coming-soon' %></li>
           <li><%= link_to "About us",    '/about-us' %></li>
         </ul>

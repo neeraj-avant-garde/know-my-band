@@ -1,0 +1,59 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div><div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div><div class="field input-append" id="eventStartTimeContainer">
+    <%= f.label :start_time %><br>
+    <input id="event-start-time" name="event[start_time]" type="text" data-format="dd-MM-yyyy HH:mm PP" value="<%= @start_time_default_value %>" />
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+    </span>
+  </div> <div class="field input-append" id="eventEndTimeContainer">
+    <%= f.label :end_time %><br>
+    <input id="event-end-time" name="event[end_time]" type="text" data-format="dd-MM-yyyy HH:mm PP" value="<%= @end_time_default_value %>"/>
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+    </span>
+  </div><div class="field">
+    <%= f.label :full_address %><br>
+    <%= f.text_area :full_address %>
+  </div><div class="field">
+    <%= f.label :latitude %><br>
+    <%= f.text_field :latitude %>
+  </div><div class="field">
+    <%= f.label :longitude %><br>
+    <%= f.text_field :longitude %>
+  </div><div class="field">
+    <%= f.label :repeat %><br>
+    <%= f.text_field :repeat %>
+  </div><div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, options_for_select(%w[Sheduled Held Cancelled]) %>
+  </div><div class="actions">
+    <%= f.submit %>
+  </div>
+<script type="text/javascript">
+  $(function() {
+    $('#eventStartTimeContainer').datetimepicker({
+      //
+    });
+    $('#eventEndTimeContainer').datetimepicker({
+      //
+    });
+  });
+</script>
+<% end %>
