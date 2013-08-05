@@ -3,7 +3,7 @@
 <table class="table table-striped table-bordered table-condensed">
   <thead>
     <tr>
-      <th>User</th>
+      <th>Admin</th>
       <th>Title</th>
       <th>Description</th>
       <th>Start time</th>
@@ -22,8 +22,8 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= event.user_id %></td>
-        <td><%= event.title %></td>
+        <td><%= gravatar_for(event.user) %> <br /> <%= link_to event.user.first_name + ' ' + event.user.last_name, "/users/#{event.user.id}" %></td>
+        <td><%= link_to event.title, "/events/#{event.id}" %></td>
         <td><%= event.description %></td>
         <td><%= readable_date_from_timestamp(event.start_time) %></td>
         <td><%= readable_date_from_timestamp(event.end_time) %></td>

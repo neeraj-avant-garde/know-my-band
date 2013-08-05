@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @invitation.user_id %>
+  <strong>Invitee:</strong>
+  <%= gravatar_for(@invitation.user) %> <br /> <%= @invitation.user.first_name %> <%== @invitation.user.last_name %>
 </p>
 
 <p>
   <strong>Event:</strong>
-  <%= @invitation.event_id %>
+  <%= link_to @invitation.event.title, "/events/#{@invitation.event.id}" %>
 </p>
 
 <p>

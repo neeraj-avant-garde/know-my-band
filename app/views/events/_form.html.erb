@@ -39,7 +39,7 @@
     <%= f.text_field :longitude %>
   </div><div class="field">
     <%= f.label :repeat %><br>
-    <%= f.text_field :repeat %>
+    <%= f.select :repeat, options_for_select({'No repeat'=>'no_repeat', 'Yearly'=>'yearly', 'Monthly'=>'monthly', 'Weekly'=>'weekly', 'Not decided'=>'not_decided'}, 'no_repeat') %>
   </div><div class="field">
     <%= f.label :status %><br>
     <%= f.select :status, options_for_select(%w[Sheduled Held Cancelled]) %>

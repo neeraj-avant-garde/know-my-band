@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  belongs_to :user
   has_many :invitations
   has_many :users, through: :invitations
 
@@ -19,4 +20,13 @@ class Event < ActiveRecord::Base
   def end_time=(datetime_string) #end time setter
     self[:end_time] = DateTime.parse(datetime_string).to_i
   end
+
+#  def user #user getter
+#    user_id = self[:user_id]
+#    user = User.find(user_id)
+#  end
+
+#  def user=(user) #user setter
+#    self[:user_id] = user.id
+#  end
 end

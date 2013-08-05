@@ -11,29 +11,22 @@
 <br>
 <h1>Profile</h1>
 <p>
+  <%= gravatar_for(@user) %>
+</p><p>
   <strong>Email:</strong>
   <%= @user.email %>
-</p>
-
-<p>
+</p><p>
   <strong>Membership type:</strong>
   <%= @user.membership_type %>
-</p>
-
-<p>
+</p><p>
   <strong>First name:</strong>
   <%= @user.first_name %>
-</p>
-
-<p>
+</p><p>
   <strong>Last name:</strong>
   <%= @user.last_name %>
-</p>
-
-<p>
+</p><p>
   <strong>Facebook:</strong>
   <%= link_to @user.facebook_id, "https://www.facebook.com/#{@user.facebook_id}", target: '_blank' %>
 </p>
-
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
