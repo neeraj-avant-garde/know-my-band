@@ -10,8 +10,14 @@ group :development, :test do
   gem 'sqlite3', '1.3.7'
 end
 
+## For secure password
+gem 'bcrypt-ruby', '3.0.1'
+
 ## For date time selection in forms
 gem 'bootstrap-datetimepicker-rails', '0.0.11'
+
+## For youtube videos
+gem "youtube_it", "2.3.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'

@@ -1,6 +1,7 @@
 class InvitationsController < ApplicationController
-  before_action :set_invitation, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_invitation, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:edit, :update, :new]
+  before_action :check_any_event_created, only: [:new, :create]
   # GET /invitations
   # GET /invitations.json
   def index
@@ -53,13 +54,13 @@ class InvitationsController < ApplicationController
 
   # DELETE /invitations/1
   # DELETE /invitations/1.json
-  def destroy
-    @invitation.destroy
-    respond_to do |format|
-      format.html { redirect_to invitations_url }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @invitation.destroy
+#    respond_to do |format|
+#      format.html { redirect_to invitations_url }
+#      format.json { head :no_content }
+#    end
+#  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -70,5 +71,10 @@ class InvitationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def invitation_params
       params.require(:invitation).permit(:user_id, :event_id, :status)
+    end
+
+    #Before filters
+    def check_any_event_created
+      redirect_to new_event_path, notice: 'Create an event before inviting someone.' unless current_user.events.any?
     end
 end

@@ -1,6 +1,10 @@
 <li>
-  <span class="content"><%= event.title %></span>
+  <div style="float:left; width:5%; padding:5px">
+    <%= gravatar_for(event.user) %> <br /> <%= link_to event.user.first_name + ' ' + event.user.last_name, event.user %>
+  </div>
+  <span class="content"><%= link_to event.title, event %></span>
   <span class="timestamp">
-    Start <%= time_ago_in_words(event.start_time) %> ago.
+    Start: <%= distance_of_time_in_words_to_now(event.start_time) %> remaining.
   </span>
+  
 </li>

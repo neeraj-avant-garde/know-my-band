@@ -8,55 +8,40 @@
 <% end %>
 <p id="notice"><%= notice %></p>
 
+<h1>Event: <%= @event.title %></h1>
 <p>
-  <strong>User:</strong>
-  <%= @event.user_id %>
-</p>
-
-<p>
+  <strong>Admin:</strong>
+  <%= gravatar_for(@event.user) %> <br /> 
+  <%= link_to @event.user.first_name + ' ' + @event.user.last_name, @event.user %> <br /> <br />
+</p><p>
   <strong>Title:</strong>
   <%= @event.title %>
-</p>
-
-<p>
+</p><p>
   <strong>Description:</strong>
   <%= @event.description %>
-</p>
-
-<p>
+</p><p>
   <strong>Start time:</strong>
   <%= @event.start_time %>
-</p>
-
-<p>
+</p><p>
   <strong>End time:</strong>
   <%= @event.end_time %>
-</p>
-
-<p>
+</p><p>
   <strong>Full address:</strong>
   <%= @event.full_address %>
-</p>
-
-<p>
+</p><p>
   <strong>Latitude:</strong>
   <%= @event.latitude %>
-</p>
-
-<p>
+</p><p>
   <strong>Longitude:</strong>
   <%= @event.longitude %>
-</p>
-
-<p>
+</p><p>
   <strong>Repeat:</strong>
-  <%= @event.repeat %>
-</p>
-
-<p>
+  <%= options_for_repeat(@event.repeat) %>
+</p><p>
   <strong>Status:</strong>
   <%= @event.status %>
 </p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+<% if current_user and (@event.user == current_user) %>
+  <%= link_to 'Edit', edit_event_path(@event) %> |
+<% end %>
+  <%= link_to 'Back', events_path %>

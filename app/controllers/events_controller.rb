@@ -1,11 +1,13 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
-  #before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_event, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:edit, :update, :new, :create]
+  before_action :correct_user, only: [:edit, :update]
 
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @my_events = current_user ? Event.where('user_id = ?', current_user.id).order('start_time ASC') : false
+    @events = Event.where('status = ?', 'Scheduled').order('start_time ASC').limit(20)
   end
 
   # GET /events/1
@@ -58,13 +60,13 @@ class EventsController < ApplicationController
 
   # DELETE /events/1
   # DELETE /events/1.json
-  def destroy
-    @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @event.destroy
+#    respond_to do |format|
+#      format.html { redirect_to events_url }
+#      format.json { head :no_content }
+#    end
+#  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -78,9 +80,8 @@ class EventsController < ApplicationController
       params.require(:event).permit(:user_id, :title, :description, :start_time, :end_time, :full_address, :latitude, :longitude, :repeat, :status)
     end
 
-    ## Convert datetime recieved to Timestamp for db
-    def format_datetime_for_db
-      #params[:event][:start_time] = DateTime.parse(params[:event][:start_time]).to_i
-      #params[:event][:end_time] = DateTime.parse(params[:event][:end_time]).to_i
+    def correct_user
+      @user = User.find(@event.user_id)
+      redirect_to(root_path) unless current_user?(@user)
     end
 end

@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :already_signed_up_user,   only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -25,10 +28,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html {
+          sign_in @user
+          flash[:success] = "Welcome to the Know My Band!"
+          redirect_to @user
+        }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
@@ -41,8 +47,12 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+      if @user.update_attributes(user_params)
+        format.html {       
+          flash[:success] = "Profile updated"
+          sign_in @user
+          redirect_to @user
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -53,13 +63,13 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @user.destroy
+#    respond_to do |format|
+#      format.html { redirect_to users_url }
+#      format.json { head :no_content }
+#    end
+#  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -69,6 +79,16 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :membership_type, :first_name, :last_name, :facebook_id, :is_confirmed, :is_active, :is_banned, :activation_hash)
+      params.require(:user).permit(:email, :password, :password_confirmation, :membership_type, :first_name, :last_name, :facebook_id, :is_confirmed, :is_active, :is_banned, :activation_hash)
+    end
+
+    # Before filters
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
+
+    def already_signed_up_user
+      redirect_to current_user, notice: "Already signed up." if signed_in?
     end
 end

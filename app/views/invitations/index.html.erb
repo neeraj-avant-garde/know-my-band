@@ -15,8 +15,8 @@
   <tbody>
     <% @invitations.each do |invitation| %>
       <tr>
-        <td><%= gravatar_for(invitation.user) %> <br /> <%= invitation.user.first_name %> <%== invitation.user.last_name %></td>
-        <td><%= invitation.event_id %></td>
+        <td><%= gravatar_for(invitation.user) %> <br /> <%= link_to invitation.user.first_name + ' ' + invitation.user.last_name, invitation.user %></td>
+        <td><%= link_to invitation.event.title, invitation.event %></td>
         <td><%= invitation.status %></td>
         <td><%= link_to 'Show', invitation %></td>
         <td><%= link_to 'Edit', edit_invitation_path(invitation) %></td>

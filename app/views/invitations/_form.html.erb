@@ -13,11 +13,12 @@
 
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
+    <%= f.hidden_field :user_id %>
+    <input type="text" id="search_user_name" />
   </div>
   <div class="field">
     <%= f.label :event_id %><br>
-    <%= f.number_field :event_id %>
+    <%= f.select :event_id, options_from_collection_for_select(Event.where('user_id = ?', current_user.id), "id", "title") %>
   </div>
   <div class="field">
     <%= f.label :status %><br>

@@ -11,6 +11,12 @@
     </div>
   <% end %>
   <div class="field">
+    <%= f.label :Admin %>
+    <%= link_to current_user.first_name + ' ' + current_user.last_name, current_user %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <br />
+    <br />
+  </div><div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div><div class="field">
@@ -42,7 +48,7 @@
     <%= f.select :repeat, options_for_select({'No repeat'=>'no_repeat', 'Yearly'=>'yearly', 'Monthly'=>'monthly', 'Weekly'=>'weekly', 'Not decided'=>'not_decided'}, 'no_repeat') %>
   </div><div class="field">
     <%= f.label :status %><br>
-    <%= f.select :status, options_for_select(%w[Sheduled Held Cancelled]) %>
+    <%= f.select :status, options_for_select(%w[Scheduled Held Cancelled]) %>
   </div><div class="actions">
     <%= f.submit %>
   </div>

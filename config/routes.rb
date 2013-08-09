@@ -1,10 +1,12 @@
 KnowMyBand::Application.routes.draw do
+  get "ajax/users"
   resources :invitations
 
   resources :events
 
   resources :users
 
+  resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -17,6 +19,10 @@ KnowMyBand::Application.routes.draw do
   match 'privacy',      to: 'pages#privacy', via: [:get]
   match 'terms',        to: 'pages#terms', via: [:get]
 
+  match '/signup',  to: 'users#new',            via: 'get'
+
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

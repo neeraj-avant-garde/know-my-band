@@ -14,27 +14,40 @@
       <th>Repeat</th>
       <th>Status</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
   <tbody>
+    <% if @my_events %>
+      <% @my_events.each do |event| %>
+        <tr>
+          <td><%= gravatar_for(event.user) %> <br /> <%= link_to event.user.first_name + ' ' + event.user.last_name, event.user %></td>
+          <td><%= link_to event.title, event %></td>
+          <td><%= event.description %></td>
+          <td><%= readable_date_from_timestamp(event.start_time) %></td>
+          <td><%= readable_date_from_timestamp(event.end_time) %></td>
+          <td><%= event.full_address %></td>
+          <td><%= event.latitude %></td>
+          <td><%= event.longitude %></td>
+          <td><%= options_for_repeat(event.repeat) %></td>
+          <td><%= event.status %></td>
+          <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        </tr>
+      <% end %>
+    <% end %>
     <% @events.each do |event| %>
       <tr>
-        <td><%= gravatar_for(event.user) %> <br /> <%= link_to event.user.first_name + ' ' + event.user.last_name, "/users/#{event.user.id}" %></td>
-        <td><%= link_to event.title, "/events/#{event.id}" %></td>
+        <td><%= gravatar_for(event.user) %> <br /> <%= link_to event.user.first_name + ' ' + event.user.last_name, event.user %></td>
+        <td><%= link_to event.title, event %></td>
         <td><%= event.description %></td>
         <td><%= readable_date_from_timestamp(event.start_time) %></td>
         <td><%= readable_date_from_timestamp(event.end_time) %></td>
         <td><%= event.full_address %></td>
         <td><%= event.latitude %></td>
         <td><%= event.longitude %></td>
-        <td><%= event.repeat %></td>
+        <td><%= options_for_repeat(event.repeat) %></td>
         <td><%= event.status %></td>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
