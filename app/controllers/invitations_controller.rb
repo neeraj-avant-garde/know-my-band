@@ -1,7 +1,8 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: [:show, :edit, :update]
   before_action :signed_in_user, only: [:edit, :update, :new]
-  before_action :check_any_event_created, only: [:new, :create]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :check_any_event_created, only: [:new]
   # GET /invitations
   # GET /invitations.json
   def index
@@ -76,5 +77,9 @@ class InvitationsController < ApplicationController
     #Before filters
     def check_any_event_created
       redirect_to new_event_path, notice: 'Create an event before inviting someone.' unless current_user.events.any?
+    end
+    
+    def correct_user
+      redirect_to invitations_path, notice: 'Unauthorized action.' unless current_user == @invitation.event.user or current_user == @invitation.user
     end
 end

@@ -7,7 +7,11 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @my_events = current_user ? Event.where('user_id = ?', current_user.id).order('start_time ASC') : false
-    @events = Event.where('status = ?', 'Scheduled').order('start_time ASC').limit(20)
+    if current_user
+      @events = Event.where('status = ? AND user_id != ?', 'Scheduled', current_user.id).order('start_time ASC').limit(20)
+    else
+      @events = Event.where('status = ?', 'Scheduled').order('start_time ASC').limit(20)
+    end
   end
 
   # GET /events/1

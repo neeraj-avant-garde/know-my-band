@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :events
   has_many :invitations
+  has_many :images, through: :albums
   has_many :events, through: :invitations
 
   before_save { self.email = email.downcase }

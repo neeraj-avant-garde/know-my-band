@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @image.user.first_name + ' ' + @image.user.last_name, @image.user %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= link_to @image.event.title, @image.event %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= link_to @image.album.name, @image.album %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @image.image_file.url %>
+  <%= image_tag @image.image_file.url(:medium) %>
+  <%= image_tag @image.image_file.url(:thumb) %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @image.title %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @image.caption %>
+</p>
+
+<p>
+  <strong>Is profile photo:</strong>
+  <%= @image.is_profile_photo %>
+</p>
+
+<%= link_to 'Edit', edit_image_path(@image) %> |
+<%= link_to 'Back', images_path %>

@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   belongs_to :user
   has_many :invitations
   has_many :users, through: :invitations
+  has_many :albums
+  has_many :images, through: :albums
 
   def start_time #start time getter
     timestamp = self[:start_time]

@@ -1,0 +1,38 @@
+<%= form_for(@image) do |f| %>
+  <% if @image.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image.errors.count, "error") %> prohibited this image from being saved:</h2>
+
+      <ul>
+      <% @image.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label current_user.first_name + ' ' + current_user.last_name %><br>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  </div><div class="field">
+    <%= f.label :event_id %><br>
+    <%= f.select :event_id, options_from_collection_for_select(Event.where('user_id = ?', current_user.id), "id", "title") %>
+  </div><div class="field">
+    <%= f.label :album_id %><br>
+    <%= f.select :album_id, options_from_collection_for_select(Album.where('user_id = ?', current_user.id), "id", "name") %>
+  </div><div class="field">
+    <%= f.label :image %><br>
+    <%= f.file_field :image_file %>
+  </div><div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div><div class="field">
+    <%= f.label :caption %><br>
+    <%= f.text_field :caption %>
+  </div><div class="field">
+    <%= f.label :is_profile_photo %><br>
+    <%= f.check_box :is_profile_photo %>
+  </div><div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

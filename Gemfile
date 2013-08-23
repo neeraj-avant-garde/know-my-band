@@ -19,6 +19,13 @@ gem 'bootstrap-datetimepicker-rails', '0.0.11'
 ## For youtube videos
 gem "youtube_it", "2.3.2"
 
+## For uploads
+#gem "carrierwave", "0.9.0"\
+gem "paperclip", "3.5.1"
+
+## For image resizing, depends on Imagemagick which is a C program
+gem "mini_magick", "3.6.0"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 

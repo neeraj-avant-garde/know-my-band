@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= link_to @album.user.first_name + ' ' + @album.user.last_name, @album.user %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= link_to @album.event.title, @album.event %>
+</p><p>
+  <strong>Name:</strong>
+  <%= @album.name %>
+</p><p>
+  <strong>Description:</strong>
+  <%= @album.description %>
+</p><p>
+  <% @album.images.each do |image| %>
+    <%= image_tag image.image_file.url %>
+  <% end %>
+</p>
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Back', albums_path %>

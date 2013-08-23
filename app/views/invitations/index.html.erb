@@ -7,8 +7,6 @@
       <th>Event</th>
       <th>Status</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   </thead>
 
@@ -18,9 +16,12 @@
         <td><%= gravatar_for(invitation.user) %> <br /> <%= link_to invitation.user.first_name + ' ' + invitation.user.last_name, invitation.user %></td>
         <td><%= link_to invitation.event.title, invitation.event %></td>
         <td><%= invitation.status %></td>
-        <td><%= link_to 'Show', invitation %></td>
-        <td><%= link_to 'Edit', edit_invitation_path(invitation) %></td>
-        <td><%= link_to 'Destroy', invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to 'Show', invitation %>
+          <% if current_user && (invitation.event.user_id == current_user.id || invitation.user_id == current_user.id) %>
+            <%= link_to 'Edit', edit_invitation_path(invitation) %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

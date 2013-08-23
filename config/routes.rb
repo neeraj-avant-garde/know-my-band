@@ -1,4 +1,8 @@
 KnowMyBand::Application.routes.draw do
+  resources :albums
+
+  resources :images
+
   get "ajax/users"
   resources :invitations
 
